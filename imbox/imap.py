@@ -17,9 +17,9 @@ class ImapTransport(object):
             self.transport = IMAP4_SSL
             if not self.port:
                 self.port = 993
-            if ssl_context is None:
-                ssl_context = pythonssllib.create_default_context()
-            kwargs["ssl_context"] = ssl_context
+            if ssl_context is not None:
+                #ssl_context = pythonssllib.create_default_context() #monkey patch to support python2.7
+                kwargs["ssl_context"] = ssl_context
         else:
             self.transport = IMAP4
             if not self.port:
